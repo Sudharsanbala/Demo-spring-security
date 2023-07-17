@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Login Page</title>
+</head>
+<body>
+<h3>Customized Login page</h3>
+
+<!-- Check if the user is logged in -->
+<div th:if="${session.user}">
+    <p>Welcome, <span th:text="${session.user.username}"></span>!</p>
+    <form action="#" th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout" />
+    </form>
+</div>
+
+<!-- Check for logout message -->
+<div th:if="${param.logout}">
+    <p>You have been logged out successfully.</p>
+</div>
+
+<!-- Check for login error -->
+<div th:if="${param.error}">
+    <p>Sorry! You entered an invalid username/password.</p>
+</div>
+
+<!-- Login form -->
+<form action="#" th:action="@{/authenticateTheUser}" method="POST">
+    <p>
+        User name: <input type="text" name="username" />
+    </p>
+    <p>
+        Password: <input type="password" name="password" />
+    </p>
+
+    <input type="submit" value="Login" />
+</form>
+
+</body>
+</html>
